@@ -3,8 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './user/user.module';
+import { User } from "./user/user.entity";
 
-const entities = [];
+const entities = [User];
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -18,6 +20,7 @@ const entities = [];
       entities: entities,
       synchronize: true,
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
