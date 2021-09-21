@@ -23,4 +23,12 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Some specific issues
+
+Rxjs seems to run into a specific problem with NestJs 8, so just run the following if something pops up around rxjs:
+
+```bash
+npm i rxjs@^7
+```
+
 
