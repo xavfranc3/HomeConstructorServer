@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
@@ -22,12 +22,14 @@ export class UserService {
   }
 
   async findUserById(id: number): Promise<User> {
-    const user = await this.userRepository.findOne(id);
-    return user;
+    return await this.userRepository.findOne(id);
   }
 
-  async findUserByEmail(email: string) {
-    const user = await this.userRepository.find({ email: email });
-    return user;
+  async findUserByEmail(email: string): Promise<User> {
+    const user = await this.userRepository.findOne({ email: email });
+    if (user) {
+      return user;
+    }
+    throw new HttpException('Wrong credentials', HttpStatus.NOT_FOUND);
   }
 }
