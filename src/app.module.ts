@@ -8,6 +8,7 @@ import { User } from './user/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { Address } from './user/entities/address.entity';
 import { PhoneInfo } from './user/entities/phone-info.entity';
+import { ProjectModule } from './project/project.module';
 
 const entities = [User, Address, PhoneInfo];
 @Module({
@@ -31,6 +32,7 @@ const entities = [User, Address, PhoneInfo];
     }),
     UserModule,
     AuthModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],
