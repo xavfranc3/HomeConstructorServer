@@ -59,6 +59,9 @@ export class ProjectService {
   }
 
   async deleteProject(id) {
-    return this.projectRepository.delete(id);
+    const deleteResponse = await this.projectRepository.delete(id);
+    if (!deleteResponse.affected) {
+      throw new HttpException('Project does not exist', HttpStatus.NOT_FOUND);
+    }
   }
 }
