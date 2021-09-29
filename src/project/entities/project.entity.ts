@@ -18,6 +18,24 @@ export class Project extends BaseEntity {
   @Column()
   name: string;
 
+  @Column({ nullable: true })
+  forecastStartDate: Date;
+
+  @Column({ nullable: true })
+  startDate: Date;
+
+  @Column({ nullable: true })
+  constructionForecastStartDate: Date;
+
+  @Column({ nullable: true })
+  constructionStartDate: Date;
+
+  @Column({ nullable: true })
+  constructionForecastEndDate: Date;
+
+  @Column({ nullable: true })
+  constructionEndDate: Date;
+
   @Exclude()
   @Column()
   @CreateDateColumn()
