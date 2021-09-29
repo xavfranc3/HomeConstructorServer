@@ -3,8 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -29,10 +28,6 @@ export class Project extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToOne(() => User, {
-    eager: true,
-    cascade: true,
-  })
-  @JoinColumn()
-  projectCreator: User;
+  @ManyToOne(() => User, (owner: User) => owner.projects)
+  owner: User;
 }

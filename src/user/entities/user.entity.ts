@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -56,6 +57,6 @@ export class User extends BaseEntity {
   @JoinColumn()
   phoneInfo: PhoneInfo;
 
-  @OneToOne(() => Project, (project: Project) => project.projectCreator)
-  project: Project;
+  @OneToMany(() => Project, (project: Project) => project.owner)
+  projects: Project[];
 }
