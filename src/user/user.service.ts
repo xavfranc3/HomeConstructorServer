@@ -35,7 +35,7 @@ export class UserService {
   }
 
   async updateUser(id: number, updateUserDto: UpdateUserDto) {
-    // Weird function because of TypeOrm bug in update function with relations
+    // Weird method because of TypeOrm bug in update function with relations
     const user = await this.userRepository.findOne(id);
     if (user) {
       const updatedUser = await this.userRepository.merge(user, updateUserDto);
