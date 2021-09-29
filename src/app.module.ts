@@ -8,8 +8,10 @@ import { User } from './user/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { Address } from './user/entities/address.entity';
 import { PhoneInfo } from './user/entities/phone-info.entity';
+import { ProjectModule } from './project/project.module';
+import { Project } from './project/entities/project.entity';
 
-const entities = [User, Address, PhoneInfo];
+const entities = [User, Address, PhoneInfo, Project];
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -31,6 +33,7 @@ const entities = [User, Address, PhoneInfo];
     }),
     UserModule,
     AuthModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],
