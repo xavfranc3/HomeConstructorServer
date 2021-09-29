@@ -13,6 +13,7 @@ import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcrypt';
 import { Address } from './address.entity';
 import { PhoneInfo } from './phone-info.entity';
+import { Project } from '../../project/entities/project.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -54,4 +55,7 @@ export class User extends BaseEntity {
   })
   @JoinColumn()
   phoneInfo: PhoneInfo;
+
+  @OneToOne(() => Project, (project: Project) => project.projectCreator)
+  project: Project;
 }
