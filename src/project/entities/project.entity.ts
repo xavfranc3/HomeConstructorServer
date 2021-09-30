@@ -12,6 +12,8 @@ import {
 import { Exclude } from 'class-transformer';
 import { User } from '../../user/entities/user.entity';
 import { Dates } from '../../shared/entities/dates.entity';
+import { Address } from '../../shared/entities/address.entity';
+import { PhoneInfo } from '../../shared/entities/phone-info.entity';
 
 @Entity()
 export class Project extends BaseEntity {
@@ -20,6 +22,21 @@ export class Project extends BaseEntity {
 
   @Column()
   name: string;
+
+  @Column({
+    type: 'enum',
+    enum: [
+      'Individual house',
+      'Flat',
+      'Building',
+      'Office',
+      'Pool',
+      'Garden structure',
+      'Extension',
+    ],
+    default: 'Individual House',
+  })
+  constructionType: string;
 
   @Exclude()
   @Column()
@@ -40,4 +57,18 @@ export class Project extends BaseEntity {
   })
   @JoinColumn()
   projectPlanning: Dates;
+
+  @OneToOne(() => Address, {
+    eager: true,
+    cascade: true,
+  })
+  @JoinColumn()
+  projectAddress: Address;
+
+  @OneToOne(() => PhoneInfo, {
+    eager: true,
+    cascade: true,
+  })
+  @JoinColumn()
+  phoneInfo: Address;
 }

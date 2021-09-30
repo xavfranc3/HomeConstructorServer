@@ -1,5 +1,4 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from '../../user/entities/user.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Address {
@@ -13,6 +12,9 @@ export class Address {
   street: string;
 
   @Column()
+  other: string;
+
+  @Column()
   city: string;
 
   @Column({ nullable: true })
@@ -23,7 +25,4 @@ export class Address {
 
   @Column({ nullable: true })
   professionalEmail: string;
-
-  @OneToOne(() => User, (user: User) => user.address)
-  user: User;
 }

@@ -4,4 +4,7 @@ export class CreateProjectDto {
   @IsString()
   @MinLength(6)
   name: string;
+
+  @IsString()
+  constructionType: string;
 }
