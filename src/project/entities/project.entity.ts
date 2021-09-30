@@ -3,12 +3,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   ManyToOne,
+  JoinColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { User } from '../../user/entities/user.entity';
+import { Dates } from '../../shared/entities/dates.entity';
 
 @Entity()
 export class Project extends BaseEntity {
@@ -17,24 +20,6 @@ export class Project extends BaseEntity {
 
   @Column()
   name: string;
-
-  @Column({ nullable: true })
-  forecastStartDate: Date;
-
-  @Column({ nullable: true })
-  startDate: Date;
-
-  @Column({ nullable: true })
-  constructionForecastStartDate: Date;
-
-  @Column({ nullable: true })
-  constructionStartDate: Date;
-
-  @Column({ nullable: true })
-  constructionForecastEndDate: Date;
-
-  @Column({ nullable: true })
-  constructionEndDate: Date;
 
   @Exclude()
   @Column()
@@ -48,4 +33,11 @@ export class Project extends BaseEntity {
 
   @ManyToOne(() => User, (owner: User) => owner.projects)
   owner: User;
+
+  @OneToOne(() => Dates, {
+    eager: true,
+    cascade: true,
+  })
+  @JoinColumn()
+  projectPlanning: Dates;
 }
