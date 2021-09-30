@@ -23,6 +23,21 @@ export class Project extends BaseEntity {
   @Column()
   name: string;
 
+  @Column({
+    type: 'enum',
+    enum: [
+      'Individual house',
+      'Flat',
+      'Building',
+      'Office',
+      'Pool',
+      'Garden structure',
+      'Extension',
+    ],
+    default: 'Individual House',
+  })
+  constructionType: string;
+
   @Exclude()
   @Column()
   @CreateDateColumn()
