@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import { Project } from '../../project/entities/project.entity';
 
 @Entity()
 export class Dates {
@@ -16,4 +17,7 @@ export class Dates {
 
   @Column({ nullable: true })
   endDate: Date;
+
+  @OneToOne(() => Project, (project: Project) => project.projectPlanning)
+  project: Project;
 }
