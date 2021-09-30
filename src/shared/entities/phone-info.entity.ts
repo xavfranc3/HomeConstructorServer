@@ -1,5 +1,4 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from '../../user/entities/user.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class PhoneInfo {
@@ -14,7 +13,4 @@ export class PhoneInfo {
 
   @Column({ nullable: true })
   otherNumber: string;
-
-  @OneToOne(() => User, (user: User) => user.phoneInfo)
-  user: User;
 }
