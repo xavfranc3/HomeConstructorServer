@@ -12,8 +12,8 @@ import {
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcrypt';
-import { Address } from './address.entity';
-import { PhoneInfo } from './phone-info.entity';
+import { Address } from '../../shared/entities/address.entity';
+import { PhoneInfo } from '../../shared/entities/phone-info.entity';
 import { Project } from '../../project/entities/project.entity';
 
 @Entity()
