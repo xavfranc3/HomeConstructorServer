@@ -4,6 +4,7 @@ import {
   Get,
   ClassSerializerInterceptor,
   Param,
+  Body,
   Put,
   UseGuards,
   Request,
