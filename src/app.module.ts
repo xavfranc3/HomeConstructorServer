@@ -7,7 +7,9 @@ import { join } from 'path';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+    isGlobal: true,
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -21,7 +23,10 @@ import { join } from 'path';
         entities: [join(__dirname, '**', '*.entity.{ts,js}')],
         synchronize: true,
       }),
-    }),
+    }),  
+    UserModule,
+    AuthModule,
+    ProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],
