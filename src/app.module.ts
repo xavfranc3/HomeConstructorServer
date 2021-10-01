@@ -4,11 +4,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-    isGlobal: true,
+      isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -23,7 +26,7 @@ import { join } from 'path';
         entities: [join(__dirname, '**', '*.entity.{ts,js}')],
         synchronize: true,
       }),
-    }),  
+    }),
     UserModule,
     AuthModule,
     ProjectModule,

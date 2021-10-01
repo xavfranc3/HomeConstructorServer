@@ -15,6 +15,16 @@ import { Dates } from '../../shared/entities/dates.entity';
 import { Address } from '../../shared/entities/address.entity';
 import { PhoneInfo } from '../../shared/entities/phone-info.entity';
 
+export enum constructionType {
+  IndividualHouse = 'Individual house',
+  Flat = 'Flat',
+  Building = 'Building',
+  Office = 'Office',
+  Pool = 'Pool',
+  Landscape = 'Landscape',
+  Extension = 'Extension',
+}
+
 @Entity()
 export class Project extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -25,16 +35,8 @@ export class Project extends BaseEntity {
 
   @Column({
     type: 'enum',
-    enum: [
-      'Individual house',
-      'Flat',
-      'Building',
-      'Office',
-      'Pool',
-      'Garden structure',
-      'Extension',
-    ],
-    default: 'Individual House',
+    enum: constructionType,
+    default: constructionType.IndividualHouse,
   })
   constructionType: string;
 
