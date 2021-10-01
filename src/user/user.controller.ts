@@ -3,7 +3,6 @@ import {
   UseInterceptors,
   Get,
   ClassSerializerInterceptor,
-  Body,
   Param,
   Post,
   Put,
@@ -28,11 +27,6 @@ export class UserController {
   @Get(':id')
   findUserById(@Param('id') id: string) {
     return this.userService.findUserById(Number(id));
-  }
-
-  @Post('/register')
-  registerUser(@Body() createUserDto: CreateUserDto) {
-    return this.userService.registerUser(createUserDto);
   }
 
   @Put(':id')
