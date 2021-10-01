@@ -16,8 +16,10 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateProjectDto } from './dto/create-project.dto';
 import RequestWithUser from '../auth/requestWithUser.interface';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import { EmailConfirmationGuard } from '../email-confirmation/guards/emailConfirmation.guard';
 
 @Controller('project')
+@UseGuards(EmailConfirmationGuard)
 @UseGuards(JwtAuthGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 export class ProjectController {

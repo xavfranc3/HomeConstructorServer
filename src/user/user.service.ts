@@ -44,4 +44,13 @@ export class UserService {
     }
     throw new HttpException('User does not exist', HttpStatus.NOT_FOUND);
   }
+
+  async markEmailAsConfirmed(email: string) {
+    return this.userRepository.update(
+      { email },
+      {
+        isEmailConfirmed: true,
+      },
+    );
+  }
 }
