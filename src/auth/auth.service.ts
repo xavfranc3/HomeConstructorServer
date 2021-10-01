@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { User } from '../user/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from '../user/dto/create-user.dto';
-import { PostgreErrorCodesEnum } from '../database/postgreErrorCodes.enum';
+import { PostgresErrorCodeEnum } from '../database/postgresErrorCode.enum';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +17,7 @@ export class AuthService {
     try {
       return this.userService.registerUser(createUserDto);
     } catch (e) {
-      if (e?.code === PostgreErrorCodesEnum.UniqueViolation) {
+      if (e?.code === PostgresErrorCodeEnum.UniqueViolation) {
         throw new HttpException(
           'User with that email already exists',
           HttpStatus.BAD_REQUEST,
