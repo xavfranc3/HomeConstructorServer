@@ -4,11 +4,17 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import * as bcrypt from 'bcrypt';
+import { Address } from '../../shared/entities/address.entity';
+import { PhoneInfo } from '../../shared/entities/phone-info.entity';
+import { Project } from '../../project/entities/project.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -36,4 +42,21 @@ export class User extends BaseEntity {
   async hashPassword() {
     this.password = await bcrypt.hash(this.password, 10);
   }
+
+  @OneToOne(() => Address, {
+    eager: true,
+    cascade: true,
+  })
+  @JoinColumn()
+  address: Address;
+
+  @OneToOne(() => PhoneInfo, {
+    eager: true,
+    cascade: true,
+  })
+  @JoinColumn()
+  phoneInfo: PhoneInfo;
+
+  @OneToMany(() => Project, (project: Project) => project.owner)
+  projects: Project[];
 }

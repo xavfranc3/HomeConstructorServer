@@ -1,9 +1,7 @@
 import {
   Controller,
   Req,
-  Request,
   Post,
-  Get,
   UseGuards,
   UseInterceptors,
   ClassSerializerInterceptor,
@@ -31,11 +29,5 @@ export class AuthController {
   @Post('login')
   async login(@Req() request: RequestWithUser) {
     return this.authService.login(request.user);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
   }
 }

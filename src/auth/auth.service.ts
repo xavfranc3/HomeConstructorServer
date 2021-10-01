@@ -2,7 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { PostgresErrorCodeEnum } from '../database/postgresErrorCode.enum';
 import * as bcrypt from 'bcrypt';
-import { User } from '../user/user.entity';
+import { User } from '../user/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 

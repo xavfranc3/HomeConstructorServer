@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './user.entity';
+import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -31,5 +32,16 @@ export class UserService {
       return user;
     }
     throw new HttpException('Wrong credentials', HttpStatus.NOT_FOUND);
+  }
+
+  async updateUser(id: number, updateUserDto: UpdateUserDto) {
+    // Weird method because of TypeOrm bug in update function with relations
+    const user = await this.findUserById(id);
+    if (user) {
+      const updatedUser = await this.userRepository.merge(user, updateUserDto);
+      await updatedUser.save();
+      return updatedUser;
+    }
+    throw new HttpException('User does not exist', HttpStatus.NOT_FOUND);
   }
 }
