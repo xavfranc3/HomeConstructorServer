@@ -5,13 +5,11 @@ import {
   ClassSerializerInterceptor,
   Body,
   Param,
-  Post,
   Put,
   UseGuards,
   Request,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
@@ -28,11 +26,6 @@ export class UserController {
   @Get(':id')
   findUserById(@Param('id') id: string) {
     return this.userService.findUserById(Number(id));
-  }
-
-  @Post('/register')
-  registerUser(@Body() createUserDto: CreateUserDto) {
-    return this.userService.registerUser(createUserDto);
   }
 
   @Put(':id')

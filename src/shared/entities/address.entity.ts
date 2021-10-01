@@ -11,7 +11,7 @@ export class Address {
   @Column()
   street: string;
 
-  @Column()
+  @Column({ nullable: true })
   other: string;
 
   @Column()
