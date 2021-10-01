@@ -3,35 +3,27 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module';
-import { User } from './user/entities/user.entity';
-import { AuthModule } from './auth/auth.module';
-import { Address } from './shared/entities/address.entity';
-import { PhoneInfo } from './shared/entities/phone-info.entity';
-import { ProjectModule } from './project/project.module';
-import { Project } from './project/entities/project.entity';
-import { Dates } from './shared/entities/dates.entity';
+import { join } from 'path';
 
-const entities = [User, Address, PhoneInfo, Project, Dates];
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true,
+    isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        host: configService.get('DB_HOST'),
-        port: configService.get('DB_PORT'),
-        username: configService.get('DB_USERNAME'),
-        password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_NAME'),
-        entities: entities,
+        type: 'postgres',
+        host: configService.get('POSTGRES_HOST'),
+        port: configService.get('POSTGRES_PORT'),
+        username: configService.get('POSTGRES_USER'),
+        password: configService.get('POSTGRES_PASSWORD'),
+        database: configService.get('POSTGRES_DB'),
+        entities: [join(__dirname, '**', '*.entity.{ts,js}')],
         synchronize: true,
       }),
-    }),
+    }),  
     UserModule,
     AuthModule,
     ProjectModule,
