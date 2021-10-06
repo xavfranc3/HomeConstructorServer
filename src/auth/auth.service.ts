@@ -5,10 +5,12 @@ import { User } from '../user/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { PostgresErrorCodeEnum } from '../database/postgresErrorCode.enum';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
+    private readonly configService: ConfigService,
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
@@ -52,6 +54,11 @@ export class AuthService {
     const payload = { username: user.email, sub: user.id };
     return {
       access_token: this.jwtService.sign(payload),
+      expiresIn: this.configService.get('JWT_EXPIRATION_TIME'),
+      user: {
+        email: user.email,
+        id: user.id,
+      },
     };
   }
 }

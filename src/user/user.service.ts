@@ -28,10 +28,11 @@ export class UserService {
 
   async findUserByEmail(email: string): Promise<User> {
     const user = await this.userRepository.findOne({ email: email });
+
     if (user) {
       return user;
     }
-    throw new HttpException('Wrong credentials', HttpStatus.NOT_FOUND);
+    throw new HttpException('User not found', HttpStatus.NOT_FOUND);
   }
 
   async updateUser(id: number, updateUserDto: UpdateUserDto) {
